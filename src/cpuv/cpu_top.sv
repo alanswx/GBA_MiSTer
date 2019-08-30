@@ -1,4 +1,4 @@
-/* Top module for the CPU. Wrapper for ARM7TDMIS_Top, since VHDL is annoying,
+/* Top module for the CPU. Wrapper for arm7tdmis_top, since VHDL is annoying,
  * and it's nice to not have signals in gba_top be all caps
  */
 
