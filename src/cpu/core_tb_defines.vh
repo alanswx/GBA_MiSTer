@@ -1,5 +1,5 @@
 /* Signal definitions for ARM7TDMI-S Core test */
-import "DPI-C" function string getenv(input string env_name);
+//import "DPI-C" function string getenv(input string env_name);
 
 /* Uncomment for logging */
 `define BUS_LOG_EN
@@ -38,13 +38,13 @@ import "DPI-C" function string getenv(input string env_name);
 /* VCS Max bit vector size is 16M */
 `define PAK_ROM_1_START  32'h0800_0000 // Wait State 0
 `define PAK_ROM_1_END    32'h09FF_FFFF
-`define PAK_ROM_1_SIZE   (`PAK_ROM_1_END - `PAK_ROM_1_START)
+//`define PAK_ROM_1_SIZE   (`PAK_ROM_1_END - `PAK_ROM_1_START)
 `define PAK_ROM_2_START  32'h0A00_0000 // Wait State 1
-`define PAK_ROM_2_END    32'h0BFF_FFDF // Changed for PAK_INIT_1
-`define PAK_ROM_2_SIZE   (`PAK_ROM_2_END - `PAK_ROM_2_START)
+//`define PAK_ROM_2_END    32'h0BFF_FFDF // Changed for PAK_INIT_1
+//`define PAK_ROM_2_SIZE   (`PAK_ROM_2_END - `PAK_ROM_2_START)
 `define PAK_ROM_3_START  32'h0C00_0000 // Wait State 2
 `define PAK_ROM_3_END    32'h0DFF_FFFF
-`define PAK_ROM_3_SIZE   (`PAK_ROM_3_END - `PAK_ROM_3_START)
+//`define PAK_ROM_3_SIZE   (`PAK_ROM_3_END - `PAK_ROM_3_START)
 
 `define PAK_INIT_1_START 32'h0BFF_FFE0
 `define PAK_INIT_1_END   32'h0BFF_FFFF

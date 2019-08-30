@@ -15,7 +15,7 @@ module gba_top (
 	input logic gba_clk,
 	input logic vga_clk,
 
-	input  logic  BTND,
+	input  logic  reset,
 
 	input  logic [7:0] SW,
 
@@ -55,8 +55,8 @@ module gba_top (
 
 	reg [6:0] GBA_CLK_DIV;
 
-	always @(posedge gba_clk or posedge BTND)
-	if (BTND) GBA_CLK_DIV <= 0;
+	always @(posedge gba_clk or posedge reset)
+	if (reset) GBA_CLK_DIV <= 0;
 	else GBA_CLK_DIV <= GBA_CLK_DIV + 1'b1;
 
 	wire clk_100 = GBA_CLK_DIV[5];
@@ -141,7 +141,7 @@ module gba_top (
 	// CPU
 	cpu_top cpu (
 		.clock(gba_clk),
-		.reset(BTND),
+		.reset(reset),
 		.nIRQ,
 		.pause(bus_pause | cpu_pause),
 		.abort,
@@ -157,7 +157,7 @@ module gba_top (
 
 	interrupt_controller intc (
 		.clock(gba_clk),
-		.reset(BTND),
+		.reset(reset),
 		.cpu_mode(mode),
 		.nIRQ,
 		.ime(IO_reg_datas[`IME_IDX][0]),
@@ -183,7 +183,7 @@ module gba_top (
 	// BRAM memory controller
 	mem_top mem (
 		.clock(gba_clk),
-		.reset(BTND),
+		.reset(reset),
 		.bus_addr,
 		.bus_wdata,
 		.bus_rdata,
@@ -264,18 +264,18 @@ module gba_top (
 		.IO_reg_datas,
 		.graphics_clock(gba_clk),
 		.vga_clock(vga_clk),
-		.reset(BTND),
+		.reset(reset),
 		.vcount,
 		.hcount,
 		.VGA_R,
 		.VGA_G,
 		.VGA_B
-		/*, .VGA_HS, .VGA_VS*/
+		, .VGA_HS, .VGA_VS
 	);
 
 	dma_top dma (
 		.clk(gba_clk),
-		.rst_b(~BTND),
+		.rst_b(~reset),
 		.registers(IO_reg_datas),
 		.addr(bus_addr),
 		.rdata(bus_rdata),
@@ -298,7 +298,7 @@ module gba_top (
 
 	timer_top timers (
 		.clock_16(gba_clk),
-		.reset(BTND),
+		.reset(reset),
 		.IO_reg_datas,
 		.internal_TM0CNT_L,
 		.internal_TM1CNT_L,
@@ -318,7 +318,7 @@ module gba_top (
 		.clk_100(clk_100),
 		.clk_256,
 		.gba_clk,
-		.reset(BTND),
+		.reset(reset),
 		.AC_ADR0,
 		.AC_ADR1,
 		.AC_GPIO0,

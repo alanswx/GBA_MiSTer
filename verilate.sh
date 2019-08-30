@@ -1,0 +1,84 @@
+#verilator --public --compiler msvc --converge-limit 2000 -Wno-WIDTH -Wno-IMPLICIT -Wno-MODDUP -Wno-UNSIGNED -Wno-CASEINCOMPLETE -Wno-CASEX -Wno-SYMRSVDWORD -Wno-COMBDLY -Wno-INITIALDLY -Wno-BLKANDNBLK -Wno-UNOPTFLAT -Wno-SELRANGE -Wno-CMPCONST -Wno-CASEOVERLAP \
+verilator --public --compiler msvc --converge-limit 2000 \
+src/audio/audio_top.sv \
+src/audio/direct_sound/ds_mixer.sv \
+src/audio/direct_sound/direct_sound.sv \
+src/audio/4channel/wave_channel.sv \
+src/audio/4channel/volume_envelope.sv \
+src/audio/4channel/square_wave.sv \
+src/audio/4channel/sound_channel.sv \
+src/audio/4channel/power.sv \
+src/audio/4channel/noise_channel.sv \
+src/audio/4channel/length_counter.sv \
+src/audio/4channel/frequency_timer.sv \
+src/audio/4channel/frequency_sweep.sv \
+src/audio/4channel/clock_divider.sv \
+src/audio/4channel/4ch_mixer.sv \
+src/graphics/special_effects/special_color_proc.sv \
+src/graphics/special_effects/se_lib.sv \
+src/graphics/special_effects/process_color.sv \
+src/graphics/special_effects/match_target.sv \
+src/graphics/priority_evaluation/window_masker.sv \
+src/graphics/priority_evaluation/window_detector.sv \
+src/graphics/priority_evaluation/valid.sv \
+src/graphics/priority_evaluation/priority_evaluation_circuit.sv \
+src/graphics/priority_evaluation/priority_comparator.sv \
+src/graphics/priority_evaluation/pe_top.sv \
+src/graphics/priority_evaluation/pe_lib.sv \
+src/graphics/priority_evaluation/pe_fsm.sv \
+src/graphics/obj/obj_top.sv \
+src/graphics/obj/obj_row_double_buffer.sv \
+src/graphics/obj/obj_rot_scale.sv \
+src/graphics/obj/obj_lookup_unit.sv \
+src/graphics/obj/obj_lib.sv \
+src/graphics/obj/obj_flip_unit.sv \
+src/graphics/obj/obj_address_unit.sv \
+src/graphics/bg_processing_circuit/vram_controller.sv \
+src/graphics/bg_processing_circuit/screen_lookup_unit.sv \
+src/graphics/bg_processing_circuit/rot_scale_unit.sv \
+src/graphics/bg_processing_circuit/reg_decoder.sv \
+src/graphics/bg_processing_circuit/overflow_handler.sv \
+src/graphics/bg_processing_circuit/mosaic_processing_unit.sv \
+src/graphics/bg_processing_circuit/lib.sv \
+src/graphics/bg_processing_circuit/data_formatter.sv \
+src/graphics/bg_processing_circuit/char_data_lookup.sv \
+src/graphics/bg_processing_circuit/bitmap_address_unit.sv \
+src/graphics/bg_processing_circuit/bg_scrolling_unit.sv \
+src/graphics/bg_processing_circuit/bg_processing_circuit.sv \
+src/graphics/lib.sv \
+src/graphics/graphics_top.sv \
+src/graphics/graphics_system.sv \
+src/graphics/vga_top.sv \
+src/timer/timer_top.sv \
+src/timer/timer.sv \
+src/mem/mem_top.sv \
+src/dma/lib.sv \
+src/dma/dma.sv \
+src/cpuv/multiplier.sv \
+src/cpuv/mulctrlandregs.sv \
+src/cpuv/mul32x8comb.sv \
+src/cpuv/thumbdecoder.sv \
+src/cpuv/shifter.sv \
+src/cpuv/shiftamountreg.sv \
+src/cpuv/resltbitmask.sv \
+src/cpuv/regfile.sv \
+src/cpuv/psr.sv \
+src/cpuv/lsadrgen.sv \
+src/cpuv/ipdr.sv \
+src/cpuv/dataoutmux.sv \
+src/cpuv/controllogic.sv \
+src/cpuv/abusmultiplexer.sv \
+src/cpuv/bbusmultiplexer.sv \
+src/cpuv/arm7tdmis_top.sv \
+src/cpuv/alu.sv \
+src/cpuv/addressmux_incrementer.sv \
+src/cpu/core_tb_defines.vh \
+src/cpuv/armpackage.vh \
+src/cpu/interrupt_controller.sv \
+src/cpu/cpu_top.sv \
+src/graphics/obj/attribute_lookup_unit.sv \
+simv/vram_A.sv		simv/vram_A_2.sv	simv/vram_B.sv		simv/vram_C.sv \
+simv/palette_bg_ram.sv simv/OAM.sv  simv/InternRam.sv simv/MainRAM.sv \
+simv/buf0.sv simv/buf1.sv \
+-I. -I./src -Isrc/cpuv  --top-module gba_top -Mdir out --cc gba_top.sv 	imgui/imgui_impl_sdl.cpp imgui/imgui_impl_opengl2.cpp imgui/imgui_draw.cpp imgui/imgui_widgets.cpp imgui/imgui.cpp -CFLAGS -I../imgui -CFLAGS `sdl2-config --cflags` -LDFLAGS "-framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo" -LDFLAGS "`sdl2-config --libs` -lpthread"  --exe sim_main.cpp
+

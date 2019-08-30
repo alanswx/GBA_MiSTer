@@ -60,6 +60,7 @@ module mem_top (
 
     // IO registers
     output logic [31:0] IO_reg_datas [`NUM_IO_REGS-1:0],
+    //output logic [31:0] IO_reg_datas [202],
 
     // Values for R/O registers
     input  logic [15:0] buttons, vcount, reg_IF,

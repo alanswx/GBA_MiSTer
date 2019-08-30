@@ -75,10 +75,12 @@ module graphics_system (
 		.buffer1_we(buffer1_we) 			// output  buffer1_we
 	);
 */
-	 
+	wire [4:0] r; 
+	wire [4:0] g; 
+	wire [4:0] b; 
 	//vga
 	//vga_top video(.clock(vga_clock), .reset(reset), .data(vga_color), .addr(vga_addr), .VGA_R, .VGA_G, .VGA_B, .VGA_HS, .VGA_VS);
-	vga_top video(.clock(vga_clock), .reset(reset), .data(vga_color), .addr(vga_addr), .VGA_HS, .VGA_VS);	// TESTING !!
+	vga_top video(.clock(vga_clock), .reset(reset), .data(vga_color), .addr(vga_addr),.VGA_R(r),.VGA_G(g),.VGA_B(b), .VGA_HS, .VGA_VS);	// TESTING !!
 
 	assign VGA_R = graphics_color[4:0];
 	assign VGA_G = graphics_color[9:5];
