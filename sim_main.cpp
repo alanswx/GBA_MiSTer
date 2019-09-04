@@ -1108,11 +1108,17 @@ int main(int argc, char** argv, char** env) {
 		g_pd3dDevice->CreateSamplerState(&desc, &g_pFontSampler);
 	}
 #else
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    // the texture should match the GPU so it doesn't have to copy
-    texture = SDL_CreateTexture(renderer,
-        SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, VGA_WIDTH, VGA_HEIGHT);
-    ImTextureID my_tex_id = (ImTextureID) texture;
+	GLuint tex;
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+
+
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, VGA_WIDTH, VGA_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE,disp_ptr);
+    ImTextureID my_tex_id = (ImTextureID) tex;
 #endif
 
 	bool follow_writes = 0;
@@ -1345,12 +1351,8 @@ int main(int argc, char** argv, char** env) {
 		//g_pSwapChain->Present(1, 0); // Present with vsync
 		g_pSwapChain->Present(0, 0); // Present without vsync
 #else
-        //SDL_RenderClear(renderer);
-        //SDL_RenderCopy(renderer, texture, NULL, NULL);
-        //SDL_RenderPresent(renderer);
-        SDL_UpdateTexture(texture, NULL, disp_ptr, VGA_WIDTH * sizeof(Uint32));
-
-
+		// update the texture
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, VGA_WIDTH, VGA_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE,disp_ptr);
 
         // Rendering
         ImGui::Render();
